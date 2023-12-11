@@ -1,2 +1,2 @@
-# flatland
-Bidimensional Cellular Automaton writen in Rust.
+# MonoAxis
+Uni dimensional Cellular Automaton writen in Rust.
