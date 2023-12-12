@@ -1,2 +1,2 @@
 # MonoAxis
-Uni dimensional Cellular Automaton writen in Rust.
+One-dimensional Cellular Automaton written in Rust.
