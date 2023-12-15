@@ -1,9 +1,9 @@
 #[derive(Debug, PartialEq)]
 pub struct LookupTable3d<T: Copy> {
     data: Vec<T>,
-    right: usize,
-    center: usize,
     left: usize,
+    center: usize,
+    right: usize,
 }
 
 #[derive(Debug, PartialEq)]
@@ -12,17 +12,17 @@ pub enum LookupTable3dError {
 }
 
 impl<T: Copy> LookupTable3d<T> {
-    pub fn new(right: usize, center: usize, left: usize, default_value: T) -> Self {
+    pub fn new(left: usize, center: usize, right: usize, default_value: T) -> Self {
         Self {
-            data: vec![default_value; right * center * left],
-            right,
-            center,
+            data: vec![default_value; left * center * right],
             left,
+            center,
+            right,
         }
     }
 
-    pub fn set(&mut self, right: usize, center: usize, left: usize, value: T) -> Result<&mut Self, LookupTable3dError> {
-        let index = match self.index(right, center, left) {
+    pub fn set(&mut self, left: usize, center: usize, right: usize, value: T) -> Result<&mut Self, LookupTable3dError> {
+        let index = match self.index(left, center, right) {
             Some(i) => i,
             None => return Err(LookupTable3dError::IndexOutOfBounds),
         };
@@ -31,8 +31,8 @@ impl<T: Copy> LookupTable3d<T> {
         Ok(self)
     }
 
-    pub fn get(&self, right: usize, center: usize, left: usize) -> Result<&T, LookupTable3dError> {
-        let index = match self.index(right, center, left) {
+    pub fn get(&self, left: usize, center: usize, right: usize) -> Result<&T, LookupTable3dError> {
+        let index = match self.index(left, center, right) {
             Some(i) => i,
             None => return Err(LookupTable3dError::IndexOutOfBounds),
         };
@@ -40,11 +40,11 @@ impl<T: Copy> LookupTable3d<T> {
        Ok(self.data.get(index).unwrap())
     }
 
-    fn index(&self, right: usize, center: usize, left: usize) -> Option<usize> {
-        return if right >= self.right || center >= self.center || left >= self.left {
+    fn index(&self, left: usize, center: usize, right: usize) -> Option<usize> {
+        return if left >= self.left || center >= self.center || right >= self.right {
             None
         } else {
-            let index = right + center * self.right + left * self.right * self.center;
+            let index = left + center * self.left + right * self.left * self.center;
             Some(index)
         };
     }
@@ -54,13 +54,13 @@ impl<T: Copy> LookupTable3d<T> {
     }
 
     pub fn iter_indices(&self) -> impl Iterator<Item=(usize, usize, usize)> {
-        let right = self.right;
-        let center = self.center;
         let left = self.left;
+        let center = self.center;
+        let right = self.right;
 
-        (0..right).flat_map(move |r| {
+        (0..left).flat_map(move |r| {
             (0..center).flat_map(move |c| {
-                (0..left).map(move |l| (r, c, l))
+                (0..right).map(move |l| (r, c, l))
             })
         })
     }
