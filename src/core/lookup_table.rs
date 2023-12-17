@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq)]
-pub struct LookupTable3d<T: Copy> {
+pub struct LookupTable3d<T: Copy + PartialEq> {
     data: Vec<T>,
     left: usize,
     center: usize,
@@ -20,7 +20,7 @@ macro_rules! get_index_or_err {
     };
 }
 
-impl<T: Copy> LookupTable3d<T> {
+impl<T: Copy + PartialEq> LookupTable3d<T> {
     pub fn new(left: usize, center: usize, right: usize, default_value: T) -> Self {
         Self {
             data: vec![default_value; left * center * right],
@@ -64,5 +64,14 @@ impl<T: Copy> LookupTable3d<T> {
                 (0..right).map(move |l| (r, c, l))
             })
         })
+    }
+
+    pub fn replace_values(&mut self, from_value: T, to_value: T) -> &mut Self {
+        self.data.iter_mut().for_each(|v| {
+            if *v == from_value {
+                *v = to_value;
+            }
+        });
+        self
     }
 }

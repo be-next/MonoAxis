@@ -7,7 +7,7 @@ use mono_axis::core::lookup_table::LookupTable3dError as LookupTable3dError;
 fn it_works() {
     let lt = LookupTable3d::new(3, 3, 3, 0);
     let result = lt.get(2, 2, 2).unwrap();
-    assert_eq!(result, &0);
+    assert_eq!(*result, 0);
 }
 
 #[test]
@@ -64,4 +64,13 @@ fn it_returns_correct_indices() {
         (2, 1, 0), (2, 1, 1), (2, 1, 2),
         (2, 2, 0), (2, 2, 1), (2, 2, 2),
     ]);
+}
+
+#[test]
+fn it_replaces_values_with_replace_values() {
+    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    _ = lt.set(2, 2, 2, 1);
+    _ = lt.replace_values(1, 2);
+    let result = lt.get(2, 2, 2).unwrap();
+    assert_eq!(*result, 2);
 }
