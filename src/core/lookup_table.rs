@@ -11,6 +11,15 @@ pub enum LookupTable3dError {
     IndexOutOfBounds,
 }
 
+macro_rules! get_index_or_err {
+    ($self:ident, $left:expr, $center:expr, $right:expr) => {
+        match $self.index($left, $center, $right) {
+            Some(i) => i,
+            None => return Err(LookupTable3dError::IndexOutOfBounds),
+        }
+    };
+}
+
 impl<T: Copy> LookupTable3d<T> {
     pub fn new(left: usize, center: usize, right: usize, default_value: T) -> Self {
         Self {
@@ -22,21 +31,13 @@ impl<T: Copy> LookupTable3d<T> {
     }
 
     pub fn set(&mut self, left: usize, center: usize, right: usize, value: T) -> Result<&mut Self, LookupTable3dError> {
-        let index = match self.index(left, center, right) {
-            Some(i) => i,
-            None => return Err(LookupTable3dError::IndexOutOfBounds),
-        };
-
+        let index = get_index_or_err!(self, left, center, right);
         self.data[index] = value;
         Ok(self)
     }
 
     pub fn get(&self, left: usize, center: usize, right: usize) -> Result<&T, LookupTable3dError> {
-        let index = match self.index(left, center, right) {
-            Some(i) => i,
-            None => return Err(LookupTable3dError::IndexOutOfBounds),
-        };
-
+        let index = get_index_or_err!(self, left, center, right);
        Ok(self.data.get(index).unwrap())
     }
 
