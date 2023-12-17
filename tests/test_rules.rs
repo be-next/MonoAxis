@@ -4,6 +4,7 @@ use mono_axis::core::rules::TransitionRules as TransitionRules;
 
 const JSON_DATA : &str = r#"
         {
+          "name": "Sum",
           "num_states": 3,
           "rules": [
             {"neighborhood": [1, 0, 1], "next_state": 2},
@@ -20,4 +21,28 @@ fn it_deserializes() {
     let rules: TransitionRules = serde_json::from_str(JSON_DATA).unwrap();
     let result = rules.rules[0].next_state;
     assert_eq!(result, 2u8);
+}
+
+#[test]
+fn it_deserializes_from_file() {
+    let result = TransitionRules::new_from_json_file("examples/example_01/rules.json");
+    assert_eq!(result.is_ok(), true);
+}
+
+#[test]
+fn it_deserializes_from_string() {
+    let result = TransitionRules::new_from_json_string(JSON_DATA);
+    assert_eq!(result.is_ok(), true);
+}
+
+#[test]
+fn it_returns_error_on_invalid_json() {
+    let result = TransitionRules::new_from_json_string("invalid json");
+    assert_eq!(result.is_err(), true);
+}
+
+#[test]
+fn it_returns_error_on_invalid_file() {
+    let result = TransitionRules::new_from_json_file("invalid file");
+    assert_eq!(result.is_err(), true);
 }
