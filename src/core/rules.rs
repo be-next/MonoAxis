@@ -42,3 +42,35 @@ impl TransitionRules {
         Self::new_from_json_string(&json_string)
     }
 }
+
+// TransitionRules iterator implementation
+pub struct TransitionRulesIter<'a> {
+    transition_rules: &'a TransitionRules,
+    index: usize,
+}
+
+impl<'a> IntoIterator for &'a TransitionRules {
+    type Item = ([u8; 3], u8);
+    type IntoIter = TransitionRulesIter<'a>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        TransitionRulesIter {
+            transition_rules: self,
+            index: 0,
+        }
+    }
+}
+
+impl<'a> Iterator for TransitionRulesIter<'a> {
+    type Item = ([u8; 3], u8);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.index < self.transition_rules.rules.len() {
+            let rule = &self.transition_rules.rules[self.index];
+            self.index += 1;
+            Some((rule.neighborhood, rule.next_state))
+        } else {
+            None
+        }
+    }
+}
