@@ -1,8 +1,8 @@
 // Desc: Tests for the TransitionRules struct
 
-use mono_axis::core::rules::TransitionRules as TransitionRules;
+use mono_axis::core::rules::TransitionRules;
 
-const JSON_DATA : &str = r#"
+const JSON_DATA: &str = r#"
         {
           "name": "Sum",
           "num_states": 3,
@@ -51,11 +51,14 @@ fn it_returns_error_on_invalid_file() {
 fn it_iterates_correctly() {
     let rules: TransitionRules = serde_json::from_str(JSON_DATA).unwrap();
     let result = rules.into_iter().collect::<Vec<([u8; 3], u8)>>();
-    assert_eq!(result, vec![
-        ([1, 0, 1], 2),
-        ([1, 2, 1], 1),
-        ([2, 1, 1], 2),
-        ([1, 2, 0], 0),
-        ([2, 1, 0], 2),
-    ]);
+    assert_eq!(
+        result,
+        vec![
+            ([1, 0, 1], 2),
+            ([1, 2, 1], 1),
+            ([2, 1, 1], 2),
+            ([1, 2, 0], 0),
+            ([2, 1, 0], 2),
+        ]
+    );
 }

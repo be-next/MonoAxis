@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub struct TransitionRule {
@@ -40,6 +40,10 @@ impl TransitionRules {
     pub fn new_from_json_file(file_path: &str) -> Result<Self, TransitionRulesError> {
         let json_string = std::fs::read_to_string(file_path)?;
         Self::new_from_json_string(&json_string)
+    }
+
+    pub fn get_num_states(&self) -> u8 {
+        self.num_states
     }
 }
 

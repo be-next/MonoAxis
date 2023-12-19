@@ -1,7 +1,7 @@
 // Desc: Tests for the lookup table module.
 
-use mono_axis::core::lookup_table::LookupTable3d as LookupTable3d;
-use mono_axis::core::lookup_table::LookupTable3dError as LookupTable3dError;
+use mono_axis::core::lookup_table::LookupTable3d;
+use mono_axis::core::lookup_table::LookupTable3dError;
 
 #[test]
 fn it_works() {
@@ -53,17 +53,38 @@ fn it_returns_correct_collection_size() {
 fn it_returns_correct_indices() {
     let lt = LookupTable3d::new(3, 3, 3, 0);
     let result = lt.iter_indices().collect::<Vec<(usize, usize, usize)>>();
-    assert_eq!(result, vec![
-        (0, 0, 0), (0, 0, 1), (0, 0, 2),
-        (0, 1, 0), (0, 1, 1), (0, 1, 2),
-        (0, 2, 0), (0, 2, 1), (0, 2, 2),
-        (1, 0, 0), (1, 0, 1), (1, 0, 2),
-        (1, 1, 0), (1, 1, 1), (1, 1, 2),
-        (1, 2, 0), (1, 2, 1), (1, 2, 2),
-        (2, 0, 0), (2, 0, 1), (2, 0, 2),
-        (2, 1, 0), (2, 1, 1), (2, 1, 2),
-        (2, 2, 0), (2, 2, 1), (2, 2, 2),
-    ]);
+    assert_eq!(
+        result,
+        vec![
+            (0, 0, 0),
+            (0, 0, 1),
+            (0, 0, 2),
+            (0, 1, 0),
+            (0, 1, 1),
+            (0, 1, 2),
+            (0, 2, 0),
+            (0, 2, 1),
+            (0, 2, 2),
+            (1, 0, 0),
+            (1, 0, 1),
+            (1, 0, 2),
+            (1, 1, 0),
+            (1, 1, 1),
+            (1, 1, 2),
+            (1, 2, 0),
+            (1, 2, 1),
+            (1, 2, 2),
+            (2, 0, 0),
+            (2, 0, 1),
+            (2, 0, 2),
+            (2, 1, 0),
+            (2, 1, 1),
+            (2, 1, 2),
+            (2, 2, 0),
+            (2, 2, 1),
+            (2, 2, 2),
+        ]
+    );
 }
 
 #[test]
@@ -73,4 +94,13 @@ fn it_replaces_values_with_replace_values() {
     _ = lt.replace_values(1, 2);
     let result = lt.get(2, 2, 2).unwrap();
     assert_eq!(*result, 2);
+}
+
+#[test]
+fn it_finalizes() {
+    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    _ = lt.set(2, 2, 2, 1);
+    _ = lt.finalize(0);
+    let result = lt.get(2, 2, 2).unwrap();
+    assert_eq!(*result, 1);
 }
