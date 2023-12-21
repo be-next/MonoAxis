@@ -2,7 +2,7 @@ use std as sdt;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct LookupTable3d {
+pub struct M1DLookupTable {
     //<T: Copy + PartialEq> {
     data: Vec<i8>,
     left: usize,
@@ -11,7 +11,7 @@ pub struct LookupTable3d {
 }
 
 #[derive(Debug, PartialEq)]
-pub enum LookupTable3dError {
+pub enum M1DLookupTableError {
     IndexOutOfBounds,
 }
 
@@ -19,12 +19,12 @@ macro_rules! get_index_or_err {
     ($self:ident, $left:expr, $center:expr, $right:expr) => {
         match $self.index($left, $center, $right) {
             Some(i) => i,
-            None => return Err(LookupTable3dError::IndexOutOfBounds),
+            None => return Err(M1DLookupTableError::IndexOutOfBounds),
         }
     };
 }
 
-impl sdt::fmt::Display for LookupTable3d {
+impl sdt::fmt::Display for M1DLookupTable {
     fn fmt(&self, f: &mut sdt::fmt::Formatter<'_>) -> sdt::fmt::Result {
         let mut result = String::new();
         for (r, c, l) in self.iter_indices() {
@@ -35,7 +35,7 @@ impl sdt::fmt::Display for LookupTable3d {
     }
 }
 
-impl LookupTable3d {
+impl M1DLookupTable {
     pub fn new(left: usize, center: usize, right: usize, default_value: i8) -> Self {
         Self {
             data: vec![default_value; left * center * right],
@@ -51,13 +51,13 @@ impl LookupTable3d {
         center: usize,
         right: usize,
         value: i8,
-    ) -> Result<&mut Self, LookupTable3dError> {
+    ) -> Result<&mut Self, M1DLookupTableError> {
         let index = get_index_or_err!(self, left, center, right);
         self.data[index] = value;
         Ok(self)
     }
 
-    pub fn get(&self, left: usize, center: usize, right: usize) -> Result<&i8, LookupTable3dError> {
+    pub fn get(&self, left: usize, center: usize, right: usize) -> Result<&i8, M1DLookupTableError> {
         let index = get_index_or_err!(self, left, center, right);
         Ok(self.data.get(index).unwrap())
     }
@@ -81,7 +81,9 @@ impl LookupTable3d {
         let right = self.right;
 
         (0..left)
-            .flat_map(move |r| (0..center).flat_map(move |c| (0..right).map(move |l| (r, c, l))))
+            .flat_map(move |r| (0..center)
+                .flat_map(move |c| (0..right)
+                    .map(move |l| (r, c, l))))
     }
 
     pub fn replace_values(&mut self, from_value: i8, to_value: i8) -> &mut Self {

@@ -1,32 +1,32 @@
 // Desc: Tests for the lookup table module.
 
-use mono_axis::core::lookup_table::LookupTable3d;
-use mono_axis::core::lookup_table::LookupTable3dError;
+use mono_axis::core::lookup_table::M1DLookupTable;
+use mono_axis::core::lookup_table::M1DLookupTableError;
 
 #[test]
 fn it_works() {
-    let lt = LookupTable3d::new(3, 3, 3, 0);
+    let lt = M1DLookupTable::new(3, 3, 3, 0);
     let result = lt.get(2, 2, 2).unwrap();
     assert_eq!(*result, 0);
 }
 
 #[test]
 fn it_returns_index_out_of_bounds_on_get_call() {
-    let lt = LookupTable3d::new(3, 3, 3, 0);
+    let lt = M1DLookupTable::new(3, 3, 3, 0);
     let result = lt.get(3, 3, 3);
-    assert_eq!(result, Err(LookupTable3dError::IndexOutOfBounds));
+    assert_eq!(result, Err(M1DLookupTableError::IndexOutOfBounds));
 }
 
 #[test]
 fn it_returns_index_out_of_bounds_on_set_call() {
-    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    let mut lt = M1DLookupTable::new(3, 3, 3, 0);
     let result = lt.set(3, 3, 3, 1);
-    assert_eq!(result, Err(LookupTable3dError::IndexOutOfBounds));
+    assert_eq!(result, Err(M1DLookupTableError::IndexOutOfBounds));
 }
 
 #[test]
 fn it_returns_index_out_of_bounds_on_set_call_with_correct_index() {
-    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    let mut lt = M1DLookupTable::new(3, 3, 3, 0);
     let lt_address_before = &lt as *const _;
     let result = lt.set(2, 2, 2, 1);
     assert!(result.is_ok());
@@ -36,7 +36,7 @@ fn it_returns_index_out_of_bounds_on_set_call_with_correct_index() {
 
 #[test]
 fn it_returns_correct_value_on_get_call() {
-    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    let mut lt = M1DLookupTable::new(3, 3, 3, 0);
     _ = lt.set(2, 2, 2, 1);
     let result = lt.get(2, 2, 2);
     assert_eq!(result, Ok(&1));
@@ -44,14 +44,14 @@ fn it_returns_correct_value_on_get_call() {
 
 #[test]
 fn it_returns_correct_collection_size() {
-    let lt = LookupTable3d::new(3, 3, 3, 0);
+    let lt = M1DLookupTable::new(3, 3, 3, 0);
     let result = lt.collection_size();
     assert_eq!(result, 27);
 }
 
 #[test]
 fn it_returns_correct_indices() {
-    let lt = LookupTable3d::new(3, 3, 3, 0);
+    let lt = M1DLookupTable::new(3, 3, 3, 0);
     let result = lt.iter_indices().collect::<Vec<(usize, usize, usize)>>();
     assert_eq!(
         result,
@@ -89,7 +89,7 @@ fn it_returns_correct_indices() {
 
 #[test]
 fn it_replaces_values_with_replace_values() {
-    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    let mut lt = M1DLookupTable::new(3, 3, 3, 0);
     _ = lt.set(2, 2, 2, 1);
     _ = lt.replace_values(1, 2);
     let result = lt.get(2, 2, 2).unwrap();
@@ -98,7 +98,7 @@ fn it_replaces_values_with_replace_values() {
 
 #[test]
 fn it_finalizes() {
-    let mut lt = LookupTable3d::new(3, 3, 3, 0);
+    let mut lt = M1DLookupTable::new(3, 3, 3, 0);
     _ = lt.set(2, 2, 2, 1);
     _ = lt.finalize(0);
     let result = lt.get(2, 2, 2).unwrap();

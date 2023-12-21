@@ -1,4 +1,4 @@
-use crate::core::lookup_table::LookupTable3d;
+use crate::core::lookup_table::M1DLookupTable;
 use crate::core::rules::{TransitionRules, TransitionRulesError};
 pub struct LookupTableBuilder;
 
@@ -19,10 +19,10 @@ impl LookupTableBuilder {
         Self {}
     }
 
-    pub fn build(&self, rules_file_name: &str) -> Result<LookupTable3d, LookupTableBuilderError> {
+    pub fn build(&self, rules_file_name: &str) -> Result<M1DLookupTable, LookupTableBuilderError> {
         let transition_rules = TransitionRules::new_from_json_file(rules_file_name)?;
 
-        let mut lookup_table = LookupTable3d::new(
+        let mut lookup_table = M1DLookupTable::new(
             transition_rules.get_num_states() as usize,
             transition_rules.get_num_states() as usize,
             transition_rules.get_num_states() as usize,
