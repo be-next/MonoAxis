@@ -1,5 +1,7 @@
 use std as sdt;
-#[derive(Debug, PartialEq)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct LookupTable3d {
     //<T: Copy + PartialEq> {
     data: Vec<i8>,
