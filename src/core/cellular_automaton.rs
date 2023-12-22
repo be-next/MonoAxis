@@ -9,6 +9,24 @@ pub struct CA1D {
     pub num_cells: usize,
 }
 
+macro_rules! get_left {
+    ($self:ident, $i:ident) => {
+        $self.current_world[$i - 1] as usize
+    };
+}
+
+macro_rules! get_center {
+    ($self:ident, $i:ident) => {
+        $self.current_world[$i] as usize
+    };
+}
+
+macro_rules! get_right {
+    ($self:ident, $i:ident) => {
+        $self.current_world[$i + 1] as usize
+    };
+}
+
 #[allow(dead_code)]
 impl CA1D {
     pub fn new(
@@ -69,10 +87,10 @@ impl CA1D {
 
     pub fn step(&mut self) {
         for i in 1..self.num_cells {
-            let left = self.current_world[self.num_cells - 1];
-            let center = self.current_world[i];
-            let right = self.current_world[i + 1];
-            let next_state = self.lookup_table.get(left as usize, center as usize, right as usize);
+            let next_state = self.lookup_table.get(
+                get_left!(self, i),
+                get_center!(self, i),
+                get_right!(self, i));
             self.next_world[i] = *next_state.unwrap() as u8;
         }
         std::mem::swap(&mut self.current_world, &mut self.next_world);
