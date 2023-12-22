@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct M1DLookupTable {
-    //<T: Copy + PartialEq> {
     data: Vec<i8>,
     left: usize,
     center: usize,
