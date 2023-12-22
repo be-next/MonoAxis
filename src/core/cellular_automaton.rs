@@ -1,3 +1,4 @@
+use std as sdt;
 use crate::core::lookup_table::M1DLookupTable;
 
 #[allow(dead_code)]
@@ -25,6 +26,16 @@ macro_rules! get_right {
     ($self:ident, $i:ident) => {
         $self.current_world[$i + 1] as usize
     };
+}
+
+impl sdt::fmt::Display for CA1D {
+    fn fmt(&self, f: &mut sdt::fmt::Formatter<'_>) -> sdt::fmt::Result {
+        let mut result = String::new();
+        for i in 0..self.num_cells {
+            result.push_str(&format!("{}", self.current_world[i]));
+        }
+        write!(f, "{}", result)
+    }
 }
 
 #[allow(dead_code)]
