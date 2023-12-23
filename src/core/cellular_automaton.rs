@@ -97,7 +97,7 @@ impl CA1D {
     }
 
     pub fn step(&mut self) {
-        for i in 1..self.num_cells {
+        for i in 1..self.num_cells -1 {
             let next_state = self.lookup_table.get(
                 get_left!(self, i),
                 get_center!(self, i),
