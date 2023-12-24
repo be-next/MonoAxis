@@ -3,8 +3,8 @@ use crate::core::lookup_table::M1DLookupTable;
 
 #[allow(dead_code)]
 pub struct CA1D {
-    pub current_world: Box<Vec<u8>>,
-    pub next_world: Box<Vec<u8>>,
+    pub current_world: Box<Vec<i8>>,
+    pub next_world: Box<Vec<i8>>,
     pub lookup_table: M1DLookupTable,
     pub num_states: u8,
     pub num_cells: usize,
@@ -12,19 +12,19 @@ pub struct CA1D {
 
 macro_rules! get_left {
     ($self:ident, $i:ident) => {
-        $self.current_world[$i - 1] as usize
+        $self.current_world[$i - 1]
     };
 }
 
 macro_rules! get_center {
     ($self:ident, $i:ident) => {
-        $self.current_world[$i] as usize
+        $self.current_world[$i]
     };
 }
 
 macro_rules! get_right {
     ($self:ident, $i:ident) => {
-        $self.current_world[$i + 1] as usize
+        $self.current_world[$i + 1]
     };
 }
 
@@ -56,11 +56,11 @@ impl CA1D {
         }
     }
 
-    pub fn get_current_world(&self) -> &Vec<u8> {
+    pub fn get_current_world(&self) -> &Vec<i8> {
         &self.current_world
     }
 
-    pub fn get_next_world(&self) -> &Vec<u8> {
+    pub fn get_next_world(&self) -> &Vec<i8> {
         &self.next_world
     }
 
@@ -76,11 +76,11 @@ impl CA1D {
         &self.lookup_table
     }
 
-    pub fn set_current_world(&mut self, current_world: Vec<u8>) {
+    pub fn set_current_world(&mut self, current_world: Vec<i8>) {
         self.current_world = Box::new(current_world);
     }
 
-    pub fn set_next_world(&mut self, next_world: Vec<u8>) {
+    pub fn set_next_world(&mut self, next_world: Vec<i8>) {
         self.next_world = Box::new(next_world);
     }
 
@@ -102,7 +102,7 @@ impl CA1D {
                 get_left!(self, i),
                 get_center!(self, i),
                 get_right!(self, i));
-            self.next_world[i] = *next_state.unwrap() as u8;
+            self.next_world[i] = *next_state.unwrap();
         }
         std::mem::swap(&mut self.current_world, &mut self.next_world);
     }

@@ -23,9 +23,7 @@ impl LookupTableBuilder {
         let transition_rules = TransitionRules::new_from_json_file(rules_file_name)?;
 
         let mut lookup_table = M1DLookupTable::new(
-            transition_rules.get_num_states() as usize,
-            transition_rules.get_num_states() as usize,
-            transition_rules.get_num_states() as usize,
+            transition_rules.get_num_states(),
             Self::DEFAULT_INITIAL_VALUE,
         );
 
@@ -34,10 +32,10 @@ impl LookupTableBuilder {
             .for_each(|(neighborhood, next_state)| {
                 lookup_table
                     .set(
-                        neighborhood[0] as usize,
-                        neighborhood[1] as usize,
-                        neighborhood[2] as usize,
-                        next_state as i8,
+                        neighborhood[0],
+                        neighborhood[1],
+                        neighborhood[2],
+                        next_state,
                     )
                     .unwrap();
             });

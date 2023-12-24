@@ -2,14 +2,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub struct TransitionRule {
-    neighborhood: [u8; 3],
-    pub next_state: u8,
+    neighborhood: [i8; 3],
+    pub next_state: i8,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct TransitionRules {
     name: String,
-    num_states: u8,
+    num_states: i8,
     pub rules: Vec<TransitionRule>,
 }
 
@@ -42,7 +42,7 @@ impl TransitionRules {
         Self::new_from_json_string(&json_string)
     }
 
-    pub fn get_num_states(&self) -> u8 {
+    pub fn get_num_states(&self) -> i8 {
         self.num_states
     }
 }
@@ -54,7 +54,7 @@ pub struct TransitionRulesIter<'a> {
 }
 
 impl<'a> IntoIterator for &'a TransitionRules {
-    type Item = ([u8; 3], u8);
+    type Item = ([i8; 3], i8);
     type IntoIter = TransitionRulesIter<'a>;
 
     fn into_iter(self) -> Self::IntoIter {
@@ -66,7 +66,7 @@ impl<'a> IntoIterator for &'a TransitionRules {
 }
 
 impl<'a> Iterator for TransitionRulesIter<'a> {
-    type Item = ([u8; 3], u8);
+    type Item = ([i8; 3], i8);
 
     fn next(&mut self) -> Option<Self::Item> {
         if self.index < self.transition_rules.rules.len() {

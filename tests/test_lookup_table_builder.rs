@@ -5,9 +5,7 @@ use mono_axis::core::lookup_table_builder::LookupTableBuilder;
 const LOOKUP_TABLE_EX1: &str = r#"
     {
         "data": [0,0,0,1,1,2,2,0,2,0,2,0,1,1,2,2,1,2,0,0,0,1,1,1,2,2,2],
-        "left": 3,
-        "center": 3,
-        "right": 3
+        "num_states": 3
     }
 "#;
 
