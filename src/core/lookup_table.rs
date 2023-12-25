@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 // The neighborhood is represented by a tuple of three values: (left, center, right).
 // The next state is represented by a single value.
 
+
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct M1DLookupTable {
     data: Vec<i8>,
@@ -26,12 +27,14 @@ macro_rules! get_index_or_err {
 }
 
 impl sdt::fmt::Display for M1DLookupTable {
-    fn fmt(&self, f: &mut sdt::fmt::Formatter<'_>) -> sdt::fmt::Result {
-        let mut result = String::new();
-        for (r, c, l) in self.iter_indices() {
-            let value = self.get(r, c, l).unwrap();
-            result.push_str(&format!("({}, {}, {}) -> {}\n", r, c, l, value));
-        }
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let result = self.iter_indices()
+            .map(|(r, c, l)| {
+                let value = self.get(r, c, l).unwrap();
+                format!("({}, {}, {}) -> {}\n", r, c, l, value)
+            })
+            .collect::<String>();
+
         write!(f, "{}", result)
     }
 }
@@ -94,9 +97,7 @@ impl M1DLookupTable {
             .filter(|(r, c, l)| self.get(*r, *c, *l).unwrap() == &value_to_replace)
             .collect();
 
-        for (r, c, l) in indices_to_modify {
-            let _ = self.set(r, c, l, c).unwrap();
-        }
+        indices_to_modify.iter().for_each(|(r, c, l)| { _ = self.set(*r, *c, *l, *c).unwrap(); });
 
         self
     }

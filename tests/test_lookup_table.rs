@@ -104,3 +104,45 @@ fn it_finalizes() {
     let result = lt.get(2, 2, 2).unwrap();
     assert_eq!(*result, 1);
 }
+
+#[test]
+fn it_displays_correctly() {
+    let num_states:i8 = 3;
+    let mut lt = M1DLookupTable::new(num_states, 0);
+
+    lt.iter_indices().for_each(|(r, c, l)| {
+        _ = lt.set(r, c, l, c);
+    });
+
+    let expected = "(0, 0, 0) -> 0
+(0, 0, 1) -> 0
+(0, 0, 2) -> 0
+(0, 1, 0) -> 1
+(0, 1, 1) -> 1
+(0, 1, 2) -> 1
+(0, 2, 0) -> 2
+(0, 2, 1) -> 2
+(0, 2, 2) -> 2
+(1, 0, 0) -> 0
+(1, 0, 1) -> 0
+(1, 0, 2) -> 0
+(1, 1, 0) -> 1
+(1, 1, 1) -> 1
+(1, 1, 2) -> 1
+(1, 2, 0) -> 2
+(1, 2, 1) -> 2
+(1, 2, 2) -> 2
+(2, 0, 0) -> 0
+(2, 0, 1) -> 0
+(2, 0, 2) -> 0
+(2, 1, 0) -> 1
+(2, 1, 1) -> 1
+(2, 1, 2) -> 1
+(2, 2, 0) -> 2
+(2, 2, 1) -> 2
+(2, 2, 2) -> 2
+";
+
+    let result = format!("{}", lt);
+    assert_eq!(result, expected);
+}
