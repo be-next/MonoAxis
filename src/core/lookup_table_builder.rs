@@ -31,12 +31,7 @@ impl LookupTableBuilder {
             .into_iter()
             .for_each(|(neighborhood, next_state)| {
                 lookup_table
-                    .set(
-                        neighborhood[0],
-                        neighborhood[1],
-                        neighborhood[2],
-                        next_state,
-                    )
+                    .set(neighborhood[0], neighborhood[1], neighborhood[2], next_state)
                     .unwrap();
             });
 
