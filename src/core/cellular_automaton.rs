@@ -84,6 +84,10 @@ impl CA1D {
         self.next_world = Box::new(next_world);
     }
 
+    pub fn set_world_initialisation(&mut self, world_initialisation: Vec<i8>) {
+        self.current_world = Box::new(world_initialisation);
+    }
+
     pub fn set_num_states(&mut self, num_states: u8) {
         self.num_states = num_states;
     }
@@ -105,6 +109,10 @@ impl CA1D {
             self.next_world[i] = *next_state.unwrap();
         }
         std::mem::swap(&mut self.current_world, &mut self.next_world);
+    }
+
+    pub fn print(&self) {
+        println!("{}", self);
     }
 
 }

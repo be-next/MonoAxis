@@ -64,4 +64,16 @@ impl CA1DConfiguration {
     pub fn get_world_initialisation(&self) -> Vec<i8> {
         self.world_initialisation.clone().into()
     }
+
+    pub fn get_rules_file_name(&self) -> &str {
+        &self.rules_file_name
+    }
+
+    pub fn get_num_states(&self) -> u8 {
+        self.num_states
+    }
+
+    pub fn get_num_cells(&self) -> usize {
+        self.num_cells
+    }
 }
