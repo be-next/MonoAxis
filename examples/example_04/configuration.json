@@ -1,0 +1,6 @@
+{
+  "num_states": 4,
+  "num_cells": 15,
+  "world_initialisation" : "0 0 1 1 1 1 0 1 1 1 1 1 1 0 0",
+  "rules_file_name": "examples/example_04/rules.json"
+}
