@@ -52,7 +52,7 @@ fn it_returns_correct_collection_size() {
 #[test]
 fn it_returns_correct_indices() {
     let lt = M1DLookupTable::new(3, 0);
-    let result = lt.iter_indices().collect::<Vec<(i8, i8, i8)>>();
+    let result = lt.iter_indices().collect::<Vec<(i32, i32, i32)>>();
     assert_eq!(
         result,
         vec![
@@ -107,7 +107,7 @@ fn it_finalizes() {
 
 #[test]
 fn it_displays_correctly() {
-    let num_states:i8 = 3;
+    let num_states:i32 = 3;
     let mut lt = M1DLookupTable::new(num_states, 0);
 
     lt.iter_indices().for_each(|(r, c, l)| {

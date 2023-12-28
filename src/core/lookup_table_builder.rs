@@ -14,7 +14,7 @@ impl From<TransitionRulesError> for LookupTableBuilderError {
 }
 
 impl LookupTableBuilder {
-    const DEFAULT_INITIAL_VALUE: i8 = -1;
+    const DEFAULT_INITIAL_VALUE: i32 = -1;
     pub fn new() -> Self {
         Self {}
     }

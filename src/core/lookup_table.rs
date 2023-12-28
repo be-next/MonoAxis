@@ -8,8 +8,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct M1DLookupTable {
-    data: Vec<i8>,
-    num_states: i8,
+    data: Vec<i32>,
+    num_states: i32,
 }
 
 #[derive(Debug, PartialEq)]
@@ -40,25 +40,26 @@ impl sdt::fmt::Display for M1DLookupTable {
 }
 
 impl M1DLookupTable {
-    pub fn new(num_states: i8, default_value: i8) -> Self {
+    pub fn new(num_states: i32, default_value: i32) -> Self {
+        let size: usize = num_states as usize;
         Self {
-            data: vec![default_value; (num_states * num_states * num_states) as usize],
+            data: vec![default_value; size * size * size],
             num_states,
         }
     }
 
-    pub fn set(&mut self, left: i8, center: i8, right: i8, value: i8) -> Result<&mut Self, M1DLookupTableError> {
+    pub fn set(&mut self, left: i32, center: i32, right: i32, value: i32) -> Result<&mut Self, M1DLookupTableError> {
         let index = get_index_or_err!(self, left, center, right);
         self.data[index as usize] = value;
         Ok(self)
     }
 
-    pub fn get(&self, left: i8, center: i8, right: i8) -> Result<&i8, M1DLookupTableError> {
+    pub fn get(&self, left: i32, center: i32, right: i32) -> Result<&i32, M1DLookupTableError> {
         let index = get_index_or_err!(self, left, center, right);
         Ok(self.data.get(index as usize).unwrap())
     }
 
-    fn index(&self, left: i8, center: i8, right: i8) -> Option<i8> {
+    fn index(&self, left: i32, center: i32, right: i32) -> Option<i32> {
         return if left >= self.num_states || center >= self.num_states || right >= self.num_states {
             None
         } else {
@@ -71,7 +72,7 @@ impl M1DLookupTable {
         self.data.len()
     }
 
-    pub fn iter_indices(&self) -> impl Iterator<Item = (i8, i8, i8)> {
+    pub fn iter_indices(&self) -> impl Iterator<Item = (i32, i32, i32)> {
         let left = self.num_states;
         let center = self.num_states;
         let right = self.num_states;
@@ -82,7 +83,7 @@ impl M1DLookupTable {
                     .map(move |l| (r, c, l))))
     }
 
-    pub fn replace_values(&mut self, from_value: i8, to_value: i8) -> &mut Self {
+    pub fn replace_values(&mut self, from_value: i32, to_value: i32) -> &mut Self {
         self.data.iter_mut().for_each(|v| {
             if *v == from_value {
                 *v = to_value;
@@ -91,8 +92,8 @@ impl M1DLookupTable {
         self
     }
 
-    pub fn finalize(&mut self, value_to_replace: i8) -> &mut Self {
-        let indices_to_modify: Vec<(i8, i8, i8)> = self
+    pub fn finalize(&mut self, value_to_replace: i32) -> &mut Self {
+        let indices_to_modify: Vec<(i32, i32, i32)> = self
             .iter_indices()
             .filter(|(r, c, l)| self.get(*r, *c, *l).unwrap() == &value_to_replace)
             .collect();

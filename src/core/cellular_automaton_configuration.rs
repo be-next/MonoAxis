@@ -2,7 +2,7 @@ use serde::{Deserialize, Deserializer};
 use std::str::FromStr;
 
 #[derive(Debug, Clone)]
-struct VecFromSpaceSeparatedString(Vec<i8>);
+struct VecFromSpaceSeparatedString(Vec<i32>);
 
 impl<'de> Deserialize<'de> for VecFromSpaceSeparatedString {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
@@ -11,14 +11,14 @@ impl<'de> Deserialize<'de> for VecFromSpaceSeparatedString {
     {
         let s = String::deserialize(deserializer)?;
         let vec = s.split_whitespace()
-            .filter_map(|num| i8::from_str(num).ok())
+            .filter_map(|num| i32::from_str(num).ok())
             .collect();
         Ok(VecFromSpaceSeparatedString(vec))
     }
 }
 
-impl Into<Vec<i8>> for VecFromSpaceSeparatedString {
-    fn into(self) -> Vec<i8> {
+impl Into<Vec<i32>> for VecFromSpaceSeparatedString {
+    fn into(self) -> Vec<i32> {
         self.0.clone()
     }
 }
@@ -44,7 +44,7 @@ impl From<std::io::Error> for CA1DConfigurationError {
 #[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct CA1DConfiguration {
-    num_states: u8,
+    num_states: i32,
     num_cells: usize,
     world_initialisation: VecFromSpaceSeparatedString,
     rules_file_name: String,
@@ -61,7 +61,7 @@ impl CA1DConfiguration {
         Self::new_from_json_string(&json_string)
     }
 
-    pub fn get_world_initialisation(&self) -> Vec<i8> {
+    pub fn get_world_initialisation(&self) -> Vec<i32> {
         self.world_initialisation.clone().into()
     }
 
@@ -69,7 +69,7 @@ impl CA1DConfiguration {
         &self.rules_file_name
     }
 
-    pub fn get_num_states(&self) -> u8 {
+    pub fn get_num_states(&self) -> i32 {
         self.num_states
     }
 

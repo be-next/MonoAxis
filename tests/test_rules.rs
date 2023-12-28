@@ -20,7 +20,7 @@ const JSON_DATA: &str = r#"
 fn it_deserializes() {
     let rules: TransitionRules = serde_json::from_str(JSON_DATA).unwrap();
     let result = rules.rules[0].next_state;
-    assert_eq!(result, 2i8);
+    assert_eq!(result, 2i32);
 }
 
 #[test]
@@ -50,7 +50,7 @@ fn it_returns_error_on_invalid_file() {
 #[test]
 fn it_iterates_correctly() {
     let rules: TransitionRules = serde_json::from_str(JSON_DATA).unwrap();
-    let result = rules.into_iter().collect::<Vec<([i8; 3], i8)>>();
+    let result = rules.into_iter().collect::<Vec<([i32; 3], i32)>>();
     assert_eq!(
         result,
         vec![
