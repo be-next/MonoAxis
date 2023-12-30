@@ -10,7 +10,7 @@ One-dimensional Cellular Automaton written in Rust.
 ---
 ## Cellular Automata in a Nutshell
 
-> A pixelated universe where simple local rules orchestrate worlds of astonishing complexity.
+> _A pixelated universe where simple local rules orchestrate worlds of astonishing complexity._
 
 Cellular automata are mathematical models composed of grids of cells, 
 each existing in one of several possible states. 
@@ -26,4 +26,6 @@ There are an astronomical number of resources on cellular automata on the web.
 But for a simple and clear presentation of cellular automata, 
 read chapter 7 of [Daniel Shiffman](https://en.wikipedia.org/wiki/Daniel_Shiffman)'s 
 [The Nature of Code](https://natureofcode.com/book/chapter-7-cellular-automata/).
+
+## Why a 1D Cellular Automaton nowadays? :thinking:
 
