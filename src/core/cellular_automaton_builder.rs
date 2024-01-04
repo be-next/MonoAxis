@@ -1,3 +1,4 @@
+use std::path::Path;
 use crate::core::cellular_automaton::CA1D;
 use crate::core::cellular_automaton_configuration::CA1DConfiguration;
 use crate::core::cellular_automaton_configuration::CA1DConfigurationError;
@@ -30,10 +31,14 @@ impl CellularAutomatonBuilder {
     }
 
     pub fn build(&self, configuration_file_name: &str) -> Result<CA1D, CellularAutomatonBuilderError> {
+        let configuration_file_path = Path::new(configuration_file_name);
+        let parent_path = configuration_file_path.parent().unwrap();
+
         let ca1d_configuration = CA1DConfiguration::new_from_json_file(configuration_file_name)?;
+        let rules_file_name = parent_path.join(ca1d_configuration.get_rules_file_name());
 
         let lookup_table_builder = LookupTableBuilder::new();
-        let lookup_table = lookup_table_builder.build(ca1d_configuration.get_rules_file_name())?;
+        let lookup_table = lookup_table_builder.build(rules_file_name.as_os_str().to_str().unwrap())?;
 
         let mut ca1d = CA1D::new(
             ca1d_configuration.get_num_states(),

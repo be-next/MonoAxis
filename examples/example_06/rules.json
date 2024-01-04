@@ -2,7 +2,6 @@
   "name": "Divide by 2",
   "num_states": 5,
   "rules": [
-    {"neighborhood": [5, 0, 0], "next_state": 0},
     {"neighborhood": [0, 1, 1], "next_state": 2},
     {"neighborhood": [2, 1, 1], "next_state": 2},
     {"neighborhood": [2, 2, 1], "next_state": 1},
