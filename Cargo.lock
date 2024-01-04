@@ -118,6 +118,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "mono_axis_cli"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "mono_axis",
+]
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"

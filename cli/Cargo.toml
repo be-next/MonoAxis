@@ -1,0 +1,14 @@
+[package]
+name                 = "mono_axis_cli"
+description          = "MoNoAxis CLI user interface"
+version.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+edition.workspace    = true
+readme.workspace     = true
+license.workspace    = true
+
+[dependencies]
+mono_axis = { path = ".." }
+clap = { version = "4.4.12", features = ["derive"] }
+
