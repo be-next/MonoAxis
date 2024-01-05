@@ -29,3 +29,24 @@ read chapter 7 of [Daniel Shiffman](https://en.wikipedia.org/wiki/Daniel_Shiffma
 
 ## Why a 1D Cellular Automaton nowadays? :thinking:
 
+### For the Fun of It
+One-dimensional cellular automata (1D CA) are just cool to play with.
+They're visually engaging and offer an intuitive way to get your head around some pretty complex ideas.
+Watching these patterns evolve over time is not only fascinating but can also be super fun.
+It's a great way to make learning about automata theory a bit more exciting.
+
+### Simplicity and Dynamics Understanding
+Compared to their multi-dimensional cousins, 1D CAs are way easier to grasp and visualize.
+But don't let their simplicity fool you – they can model some pretty intricate behaviors.
+Even with simple rules, 1D CAs can show emergent behaviors and interesting patterns, 
+giving us a peek into how simple rules can lead to complex dynamics. 
+This makes them perfect for teaching and understanding the chaos theory, 
+dynamical systems theory, and computational properties.
+
+### Learning Rust Programming
+Approaching one-dimensional cellular automata is for me a way to challenge myself with Rust.
+It's less about delving into the specific details of the language and more about using this 
+project as a field of exploration to get a handle on Rust. By working on creating a 1D CA, 
+I'm giving myself the opportunity to practically test Rust, 
+to understand how it works and how it can be used to materialize such an interesting concept. 
+It's more of a learning journey and discovery with the language through a project that interests me.
