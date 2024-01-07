@@ -12,8 +12,7 @@ In the future, I plan to add a GUI tool to make it more fun to play with.
 
 ## Table of Contents
 
-- [MonoAxis](#monoaxis)
-  - [Table of Contents](#table-of-contents)
+
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
