@@ -14,7 +14,7 @@ license.workspace    = true
 [dependencies]
 serde       = { version = "1.0.194", features = ["derive"] }
 serde_json  = "1.0.111"
-#clap = { version = "4.4.12", features = ["derive"] }
+clap = { version = "4.4.13", features = ["derive"] }
 
 
 [workspace]
@@ -29,3 +29,7 @@ repository  = "https://github.com/be-next/MonoAxis"
 edition     = "2021"
 readme      = "README.md"
 license     = "Apache-2.0"
+
+[[bin]]
+name = "mono_axis_cli"
+path = "cli/src/main.rs"
