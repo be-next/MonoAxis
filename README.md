@@ -5,7 +5,7 @@
 ![GitHub License](https://img.shields.io/github/license/be-next/MonoAxis?logo=apache)
 ![GitHub top language](https://img.shields.io/github/languages/top/be-next/MonoAxis?logo=rust)
 
-MonoAxis is a One-dimensional Cellular Automaton tool written in Rust.
+MonoAxis is a One-dimensional Cellular Automaton tool.
 
 In this repository, you will find a Rust library and a CLI tool to play with 1D CA.
 In the future, I plan to add a GUI tool to make it more fun to play with.
@@ -31,7 +31,7 @@ In the future, I plan to add a GUI tool to make it more fun to play with.
 ### Prerequisites
 
 MonoAxis is written in Rust, and you will need to install the Rust toolchain to build and run it.
-To build and run this project, you will need the following tools (as usual):
+So, to build and run this project, you will need the following tools (as usual):
 
 - [Rust](https://www.rust-lang.org/tools/install) and [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) (no matter the OS)
 
@@ -50,13 +50,13 @@ Nothing fancy here, just clone the repo and build the project.
 
 ### Usage
 
-In the directory examples, you will find some examples of 1D CA rules.
+In the ```examples``` directory, you will find examples of 1D CA rules.
 You can use them to play with the CLI tool.
 
 For example, to run the ```Sum``` rule, you can use the following command:
 ```cargo run -- -c examples/example_01/configuration.json -s 7```  
 
-Comprehensive description of mano_axis_cli is here: [mano_axis_cli](cli/README.md).
+Comprehensive description of ```mano_axis_cli``` is here: [mano_axis_cli](cli/README.md).
 
 ## How does it work?
 
@@ -65,14 +65,14 @@ Comprehensive description of mano_axis_cli is here: [mano_axis_cli](cli/README.m
 MoNoAxis cellular automaton is composed of a 1D array of cells.
 Each cell can be in one of several states. The number of states is configurable.
 The state of each cell changes over discrete time according to predefined rules,
-based on the states of the cell and neighboring left en right cells.
+based on the states of the cell and neighboring left and right cells.
 
 The first and last cells of the array are considered neighbors, but never change their state.
 It's a convenient way to simulate a closed universe.
 
 ### Rules
 
-The rules are defined in a JSON file. Here is an example of a rule:
+The rules are defined in a JSON file. Here is an example of a rules:
 
 ```json
 {
@@ -123,7 +123,7 @@ Where:
 
 ## Some Examples
 
-Here are some examples of 1D CA rules. You can find them in the directory examples.
+Here are some examples of 1D CA rules. You can find them in the ```examples``` directory.
 
   - **example_01**: Sum #1. At the beginning, there are two packets of cells in state 1. The rule is designed to make them move towards each other and merge into one packet.
   - **example_02**: Sum #2. At the beginning, there are two packets of cells in state 1. The rule is designed to show a third packet on the right, which is the sum of the first two packets.
