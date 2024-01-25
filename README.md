@@ -25,9 +25,9 @@ In the future, I plan to add a GUI tool to make it more fun to play with.
     - [For the Fun of It](#for-the-fun-of-it)
     - [Simplicity and Dynamics Understanding](#simplicity-and-dynamics-understanding)
     - [Learning Rust Programming](#learning-rust-programming)
-    - [Beyond the Spectrum: The Intricate Tapestry of Multidimensional Cellular Automata](#beyond-the-spectrum-the-intricate-tapestry-of-multidimensional-cellular-automata)
-      - [Recursive universe of Life](#recursive-universe-of-life)
-      - [Lenia : continuous cellular automata](#lenia--continuous-cellular-automata)
+  - [Beyond the Spectrum: The Intricate Tapestry of Multidimensional Cellular Automata](#beyond-the-spectrum-the-intricate-tapestry-of-multidimensional-cellular-automata)
+    - [Recursive universe of Life](#recursive-universe-of-life)
+    - [Lenia : continuous cellular automata](#lenia--continuous-cellular-automata)
 
 
 ## Getting Started
