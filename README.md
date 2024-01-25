@@ -25,6 +25,9 @@ In the future, I plan to add a GUI tool to make it more fun to play with.
     - [For the Fun of It](#for-the-fun-of-it)
     - [Simplicity and Dynamics Understanding](#simplicity-and-dynamics-understanding)
     - [Learning Rust Programming](#learning-rust-programming)
+    - [Beyond the Spectrum: The Intricate Tapestry of Multidimensional Cellular Automata](#beyond-the-spectrum-the-intricate-tapestry-of-multidimensional-cellular-automata)
+      - [Recursive universe of Life](#recursive-universe-of-life)
+      - [Lenia : continuous cellular automata](#lenia--continuous-cellular-automata)
 
 
 ## Getting Started
@@ -180,3 +183,27 @@ project as a field of exploration to get a handle on Rust. By working on creatin
 I'm giving myself the opportunity to practically test Rust, 
 to understand how it works and how it can be used to materialize such an interesting concept. 
 It's more of a learning journey and discovery with the language through a project that interests me.
+
+## Beyond the Spectrum: The Intricate Tapestry of Multidimensional Cellular Automata
+
+### Recursive universe of Life
+
+One-dimensional cellular automata are just the tip of the iceberg. 
+There are also two-dimensional cellular automata, three-dimensional cellular automata,
+and even cellular automata in higher dimensions.
+
+The most famous two-dimensional cellular automaton is Conway's Game of Life.
+It's a zero-player game, meaning that its evolution is determined by its initial state,
+requiring no further input. One interacts with the Game of Life by creating an initial configuration
+and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine.
+
+Here is a unusual implementation of Conway's Game of Life: [Recursive universe of Life](https://oimo.io/works/life/).
+Explained in this article: https://blog.oimo.io/2023/04/10/life-universe-en/.
+
+### Lenia : continuous cellular automata
+
+Lenia is a continuous cellular automaton (CCA) that can simulate life-like processes in real time.
+It's a 2D CCA that uses a continuous space of states and a continuous space of time.
+It's breaking the discrete paradigm of traditional cellular automata, and opens the door to a new world of possibilities.
+
+Visit the Lenia website: https://chakazul.github.io/Lenia/. You will discover a stunning world of patterns and behaviors!
