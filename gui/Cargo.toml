@@ -1,0 +1,15 @@
+[package]
+name                 = "mono_axis_gui"
+description          = "MonoAxis GUI user interface"
+version.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+edition.workspace    = true
+readme.workspace     = true
+license.workspace    = true
+
+[dependencies]
+iced = {version = "0.10.0", features = ["canvas", "image", "svg", "debug"]}
+mono_axis = { path = ".." }
+
+

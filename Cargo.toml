@@ -15,11 +15,12 @@ license.workspace    = true
 serde       = { version = "1.0.195", features = ["derive"] }
 serde_json  = "1.0.111"
 clap = { version = "4.4.18", features = ["derive"] }
-
+iced = {version = "0.10.0", features = ["canvas", "image", "svg", "debug"]}
 
 [workspace]
 members = [
     "cli",
+    "gui",
 ]
 
 [workspace.package]
@@ -33,3 +34,7 @@ license     = "Apache-2.0"
 [[bin]]
 name = "mono_axis_cli"
 path = "cli/src/main.rs"
+
+[[bin]]
+name = "mono_axis_gui"
+path = "gui/src/main.rs"
