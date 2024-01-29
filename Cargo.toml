@@ -16,6 +16,7 @@ serde       = { version = "1.0.196", features = ["derive"] }
 serde_json  = "1.0.112"
 clap = { version = "4.4.18", features = ["derive"] }
 iced = {version = "0.10.0", features = ["canvas", "image", "svg", "debug"]}
+iced_style = "0.9.0"
 
 [workspace]
 members = [

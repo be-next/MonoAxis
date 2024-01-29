@@ -3,6 +3,8 @@ mod ca1dspace;
 use iced::{Alignment, executor, Length, window};
 use iced::{Application, Command, Element, Settings, Theme};
 use iced::widget::{button, column, container};
+use iced::theme::Button;
+
 
 pub fn main() -> iced::Result {
     CA1DSpace::run(Settings::default())
@@ -21,9 +23,9 @@ enum Message {
 
 impl Application for CA1DSpace {
     type Executor = executor::Default;
-    type Flags = ();
     type Message = Message;
     type Theme = Theme;
+    type Flags = ();
 
     fn new(_flags: Self::Flags) -> (Self, Command<Self::Message>) {
         (
@@ -45,10 +47,11 @@ impl Application for CA1DSpace {
 
     fn view(&self) -> Element<Self::Message> {
         let content = column![
-                "Are you sure you want to exit?",
-                button("Yes, exit now")
-                    .padding([10, 20])
-                    .on_press(Message::Exit),
+            "Are you sure you want to exit?",
+            button("Yes, exit now")
+            .style(Button::Destructive)
+            .padding([10, 20])
+            .on_press(Message::Exit),
             ]
             .spacing(10)
             .align_items(Alignment::Center);
@@ -63,5 +66,6 @@ impl Application for CA1DSpace {
 
     fn theme(&self) -> Self::Theme {
         Theme::Dark
+        // Theme::default()
     }
 }
