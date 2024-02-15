@@ -40,7 +40,7 @@ impl Application for CA1DSpace {
 
     fn update(&mut self, message: Self::Message) -> Command<Self::Message> {
         match message {
-            Message::Exit => window::close(),
+            Message::Exit => window::close(iced::window::Id),
             // _ => Command::none()
         }
     }
