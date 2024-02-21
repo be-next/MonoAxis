@@ -1,10 +1,10 @@
 mod ca1dspace;
+mod pop_up;
 
 use iced::{Alignment, executor, Length, window};
 use iced::{Application, Command, Element, Settings, Theme};
 use iced::widget::{button, column, container};
 use iced::theme::Button;
-
 
 pub fn main() -> iced::Result {
     CA1DSpace::run(Settings::default())
@@ -40,7 +40,11 @@ impl Application for CA1DSpace {
 
     fn update(&mut self, message: Self::Message) -> Command<Self::Message> {
         match message {
-            Message::Exit => window::close(iced::window::Id),
+            Message::Exit => {
+                std::process::exit(0);
+            }
+
+            // Message::Exit => window::close(iced::window::Id),
             // _ => Command::none()
         }
     }
