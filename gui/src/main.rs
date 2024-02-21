@@ -1,7 +1,7 @@
 mod ca1dspace;
-mod pop_up;
+// mod pop_up;
 
-use iced::{Alignment, executor, Length, window};
+use iced::{Alignment, executor, Length};
 use iced::{Application, Command, Element, Settings, Theme};
 use iced::widget::{button, column, container};
 use iced::theme::Button;
