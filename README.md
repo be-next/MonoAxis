@@ -60,7 +60,7 @@ You can use them to play with the CLI tool.
 For example, to run the ```Sum``` rule, you can use the following command:
 ```cargo run -- -c examples/example_01/configuration.json -s 7```  
 
-Comprehensive description of ```mano_axis_cli``` is here: [mano_axis_cli](cli/README.md).
+Comprehensive description of ```mono_axis_cli``` is here: [mano_axis_cli](cli/README.md).
 
 ## How does it work?
 
