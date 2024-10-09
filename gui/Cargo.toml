@@ -9,7 +9,7 @@ readme.workspace     = true
 license.workspace    = true
 
 [dependencies]
-iced = {version = "0.12.1", features = ["canvas", "image", "svg", "debug"]}
+iced = {version = "0.13.1", features = ["canvas", "image", "svg", "debug"]}
 iced_style = "0.12.1"
 mono_axis = { path = ".." }
 
