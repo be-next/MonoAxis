@@ -2,6 +2,8 @@
 
 ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/be-next/MonoAxis?logo=github)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/be-next/MonoAxis/rust.yml?logo=github)
+[![dependency status](https://deps.rs/repo/github/be-next/MonoAxis/status.svg?path=%2F)](https://deps.rs/repo/github/be-next/MonoAxis?path=%2F)
+
 ![GitHub Release](https://img.shields.io/github/v/release/be-next/MonoAxis)
 ![GitHub License](https://img.shields.io/github/license/be-next/MonoAxis?logo=apache)
 ![GitHub top language](https://img.shields.io/github/languages/top/be-next/MonoAxis?logo=rust)
