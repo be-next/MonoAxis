@@ -10,5 +10,5 @@ license.workspace    = true
 
 [dependencies]
 mono_axis = { path = ".." }
-clap = { version = "4.6.0", features = ["derive"] }
+clap = { version = "4.6.1", features = ["derive"] }
 
